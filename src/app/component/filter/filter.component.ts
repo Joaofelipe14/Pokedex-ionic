@@ -44,7 +44,7 @@ export class FilterComponent implements OnInit {
   types = POKEMON_TYPES;
 
   showAutocomplete: boolean = false;
-  selectedPokemon: string = ''; // Variável para armazenar o nome do Pokémon selecionado
+  selectedPokemon: string = ''; 
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -86,16 +86,13 @@ export class FilterComponent implements OnInit {
     this.showAutocomplete = false;
     this.listAutoCompletePokemons = [];
     this.pokemonSelected.emit('');
-
-    this.selectedPokemon = ''; // Limpa o nome do Pokémon selecionado ao limpar o campo de pesquisa
+    this.selectedPokemon = ''; 
 
   }
 
   selectPokemon(pokemon: PokemonList) {
     this.showAutocomplete = false;
-    this.selectedPokemon = pokemon.name; // Atualiza o nome do Pokémon selecionado
-    console.log('selecionando pokemon...')
-    console.log(pokemon)
+    this.selectedPokemon = pokemon.name;
     this.pokemonSelected.emit( this.selectedPokemon );
 
   }
