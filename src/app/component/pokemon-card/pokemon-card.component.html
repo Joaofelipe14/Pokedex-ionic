@@ -1,0 +1,63 @@
+<ion-card  size="6" class="custom-card">
+
+  <ion-row class="ion-justify-content-around">
+    <ion-col size="6">
+      <div>
+        #{{ pokemon.id }}
+      </div>
+
+      <ion-card-header class="card-header">
+        <div class="title-container">
+          <!-- Nome do Pokémon -->
+          <ion-card-title class="title">
+            {{ pokemon.name }}
+          </ion-card-title>
+          <ion-icon [name]="isFavorite(pokemon.name) ? 'star' : 'star-outline'" (click)="toggleFavorite(pokemon.name)"
+            [class.favorite]="isFavorite(pokemon.name)" [class.not-favorite]="!isFavorite(pokemon.name)"
+            class="favorite-icon">
+          </ion-icon>
+        </div>
+      </ion-card-header>
+      <ion-card-subtitle>
+        <ion-row class="ion-justify-content-around stats">
+          <!-- Attack -->
+          <ion-col class="ion-text-center" col="6">
+            <ng-container *ngFor="let stat of pokemon.stats">
+              <ng-container *ngIf="stat.stat.name === 'attack'">
+                <div class="stat-circle ">{{ stat.base_stat }}</div>
+                <div class="stat-name">Attack</div>
+              </ng-container>
+            </ng-container>
+          </ion-col>
+          <!-- Defense -->
+          <ion-col class="ion-text-center" col="6">
+            <ng-container *ngFor="let stat of pokemon.stats">
+              <ng-container *ngIf="stat.stat.name === 'defense'">
+                <div class="stat-circle">{{ stat.base_stat }}</div>
+                <div class="stat-name">Defense</div>
+              </ng-container>
+            </ng-container>
+          </ion-col>
+        </ion-row>
+
+
+        <!-- Tipos -->
+        <ion-row class="ion-justify-content-around">
+
+          <ion-col col="6" *ngFor="let type of pokemon.types"
+            class="cardTag {{'bg-color-'+ type.type.name + '-light'}}">
+            {{ type.type.name }}
+          </ion-col>
+
+        </ion-row>
+      </ion-card-subtitle>
+
+    </ion-col>
+    <ion-col  [routerLink]="['/details/'+pokemon.name]"  class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
+      <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'" alt="Background Image" >
+
+      <img class="img" [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name">
+
+    </ion-col>
+  </ion-row>
+</ion-card>

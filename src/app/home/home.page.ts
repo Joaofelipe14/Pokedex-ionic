@@ -46,13 +46,10 @@ export class HomePage implements OnInit {
 
   onUpdateFarovitePokemon(){
     this.loadListFavorites()
-    if(this.selectedFilter='favorite'){
-    }
-
+  
   }
 
   /*Funcao para carregar e filtrar lista de pokemons*/
-
   loadListFavorites() {
     this.pokemonFavoritesService.getFavorites().then((favorites: string[]) => {
       const pokemonFavoritList: PokemonList[] = favorites.map(name => ({

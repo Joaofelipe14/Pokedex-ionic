@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { NavbarComponent } from '../component/navbar/navbar.component';
 import { FilterComponent } from '../component/filter/filter.component';
+import { PokemonCardComponent } from '../component/pokemon-card/pokemon-card.component';
 
 
 @NgModule({
@@ -16,6 +17,6 @@ import { FilterComponent } from '../component/filter/filter.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, NavbarComponent, FilterComponent]
+  declarations: [HomePage, NavbarComponent, FilterComponent,PokemonCardComponent]
 })
 export class HomePageModule {}

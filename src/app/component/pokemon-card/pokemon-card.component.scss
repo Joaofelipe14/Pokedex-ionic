@@ -1,0 +1,137 @@
+
+.custom-card,
+.custom-text {
+    font-family: 'Karla';
+    font-style: normal;
+}
+
+.custom-text {
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 41px;
+    letter-spacing: 3px;
+
+}
+
+
+.stat-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat-col {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.stat-circle {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border: 3px solid #212121;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.cardTag {
+    text-align: center;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 11px;
+    background: #73D677;
+    /* Cor de fundo */
+    box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
+    /* Sombra interna na parte inferior */
+    /* Sombra interna na parte inferior */
+    color: #fff;
+    max-width: 80px;
+
+}
+
+.stat-name {
+    font-size: 1em;
+}
+
+.favorite-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.favorite {
+    color: gold;
+}
+
+.not-favorite {
+    color: gray;
+}
+
+.title{
+    font-weight: bold;
+
+}
+.title::first-letter{
+    text-transform: uppercase;
+}
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.custom-button {
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+  }
+  
+  .custom-button:disabled {
+    background-color: #cccccc; /* Cor de fundo quando desabilitado */
+    cursor: not-allowed; /* Cursor do mouse quando desabilitado */
+  }
+  
+  .img{
+    max-width: 250px;
+    max-height: 250px;
+    z-index: 1;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: inherit;
+    object-fit: inherit;
+    -o-object-position: inherit;
+    object-position: inherit;
+  }
+
+  .card-column {
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    object-fit: cover; // Isso é usado para ajustar a imagem para cobrir todo o conteúdo do contêiner
+    filter: grayscale(100%);
+  }
+  
