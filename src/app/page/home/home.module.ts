@@ -5,9 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { NavbarComponent } from '../component/navbar/navbar.component';
-import { FilterComponent } from '../component/filter/filter.component';
-import { PokemonCardComponent } from '../component/pokemon-card/pokemon-card.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,8 +13,9 @@ import { PokemonCardComponent } from '../component/pokemon-card/pokemon-card.com
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SharedModule
   ],
-  declarations: [HomePage, NavbarComponent, FilterComponent,PokemonCardComponent]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

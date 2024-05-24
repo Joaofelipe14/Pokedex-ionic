@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { forkJoin } from 'rxjs';
-import { PokemonDetail, PokemonList } from '../model/pokemon.model';
-import { PokemonService } from '../service/pokemon.service';
-import { PokemonFavoritesService } from '../service/pokemon-favorites.service';
+import { PokemonDetail, PokemonList } from '../../model/pokemon.model';
+import { PokemonService } from '../../service/pokemon.service';
+import { PokemonFavoritesService } from '../../service/pokemon-favorites.service';
 
 @Component({
   selector: 'app-home',

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PokemonList } from '../../model/pokemon.model';
 import { PokemonFavoritesService } from 'src/app/service/pokemon-favorites.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
@@ -15,7 +16,7 @@ export class PokemonCardComponent implements OnInit {
 
   imageLoaded: boolean = false;
 
-  constructor( private pokemonFavoritesService: PokemonFavoritesService) { }
+  constructor(private router: Router, private pokemonFavoritesService: PokemonFavoritesService) { }
 
   ngOnInit() {
 
@@ -42,6 +43,10 @@ export class PokemonCardComponent implements OnInit {
 
   isFavorite(pokemonName: string): boolean {
     return this.pokemonFavoritList.some(pokemon => pokemon.name == pokemonName);
+  }
+
+  goToDetails(pokemonName: string) {
+    this.router.navigate(['/details', pokemonName]);
   }
 
  

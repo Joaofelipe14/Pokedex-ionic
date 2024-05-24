@@ -53,9 +53,9 @@
       </ion-card-subtitle>
 
     </ion-col>
-    <ion-col  [routerLink]="['/details/'+pokemon.name]"  class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
-      <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'" alt="Background Image" >
+    <ion-col   (click)="goToDetails(pokemon.name)" class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
 
+      <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'" alt="Background Image" >
       <img class="img" [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name">
 
     </ion-col>
