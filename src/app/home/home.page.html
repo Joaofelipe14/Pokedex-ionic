@@ -1,4 +1,7 @@
 <ion-content>
   <app-navbar></app-navbar>
 
+  <app-filter (typeSelected)="onTypeSeleceted($event)"   (pokemonSelected)="onPokemonSelected($event)" 
+  (FavoritesSelected)="onShowFavorites()"></app-filter>
+
 </ion-content>

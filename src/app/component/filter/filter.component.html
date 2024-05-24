@@ -1,0 +1,32 @@
+<ion-toolbar class="ion-padding-top">
+  <div class="custom-text ion-text-center ion-padding-bottom">
+    More than 1000 <strong>Pokemons</strong> for you to choose your favorite
+  </div>
+
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-lg='10'>
+      <ion-searchbar placeholder="Buscar Pokémon..." autocomplete="false" (ionInput)="onSearchChange($event)" [(ngModel)]="selectedPokemon"
+        (ionClear)="onClearSearch()" show-clear-button="always" clear-icon="trash-bin">
+      </ion-searchbar>
+      <ion-list *ngIf="showAutocomplete">
+        <ion-item (click)="selectPokemon(pokemon)" *ngFor="let pokemon of listAutoCompletePokemons"
+          class="ion-activatable">
+          {{ pokemon.name }}
+        </ion-item>
+      </ion-list>
+    </ion-col>
+
+    <ion-col size="12" size-lg='4'>
+      <ion-select placeholder="Filtrar por tipo" interface="popover" (ionChange)="showType($event.detail.value)">
+        <ion-select-option value="all">All</ion-select-option>
+        <ion-select-option *ngFor="let type of types" [value]="type.name">{{ type.name }}</ion-select-option>
+      </ion-select>
+    </ion-col>
+
+    <ion-col size="12" size-lg="4">
+      <ion-button expand="full" (click)="showFavorites()">Listar Pokémons Salvos</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-toolbar>

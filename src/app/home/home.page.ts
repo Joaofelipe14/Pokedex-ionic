@@ -9,4 +9,19 @@ export class HomePage {
 
   constructor() {}
 
+  onPokemonSelected(pokemon: string) {
+    console.log(pokemon)
+  }
+
+  onShowFavorites(){
+    console.log('morstar favoritos')
+    }
+
+  onTypeSeleceted(type: string){
+
+    console.log(type)
+  }
+
+
+
 }
