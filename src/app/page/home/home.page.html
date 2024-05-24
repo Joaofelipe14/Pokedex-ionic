@@ -23,7 +23,7 @@
     <ion-col size="12" size-lg="10">
       <ion-toolbar color='transparent' class="ion-justify-content-center">
         <ion-buttons slot="start">
-          <ion-button (click)="previousPage()" [disabled]="isLoading" [disabled]="offset < limit"
+          <ion-button (click)="previousPage()" [disabled]="isLoading || offset < limit"
             class="custom-button">Anterior</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">

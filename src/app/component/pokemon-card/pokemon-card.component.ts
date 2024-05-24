@@ -13,7 +13,6 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemon: any;
   @Input() pokemonFavoritList: PokemonList[] = [];
   @Output() updateFarovitePokemon = new EventEmitter<string>();
-
   imageLoaded: boolean = false;
 
   constructor(private router: Router, private pokemonFavoritesService: PokemonFavoritesService) { }
