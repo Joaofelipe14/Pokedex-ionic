@@ -109,3 +109,8 @@ $general: ('black', $black), ('white', $white), ('grass', $grass), ('grass-light
     }
   }
   
+  ion-spinner[name="custom"] {
+    content: url('assets/loading.gif');
+    width: 45px;
+    height: 45px;
+  }

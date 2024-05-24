@@ -1,6 +1,94 @@
-
 <ion-content [fullscreen]="true">
 
-    <app-navbar></app-navbar>
+    <ion-grid *ngIf="!pokemon" class="ion-content-centered">
+        <ion-label> Loading
+        </ion-label>
+        <ion-spinner name="custom"></ion-spinner>
+    </ion-grid>
+
+
+    <ng-container *ngIf="pokemon">
+        <app-navbar></app-navbar>
+        <ion-card-header>
+            Detalhes do Pokémon
+        </ion-card-header>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col size="6"> <ion-img class="custom-img"
+                        [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name"></ion-img>
+                </ion-col>
+
+                <ion-col size="6">
+
+                    <ion-card>
+                        <ion-row style="border-bottom: groove;">
+                            <ion-col col-4>
+                                <ion-label class="text-right font-weight-bold">#</ion-label>
+                            </ion-col>
+                            <ion-col col-8>
+                                <ion-label>#{{ pokemon.id }}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="border-bottom: groove;">
+                            <ion-col col-4>
+                                <ion-label class="text-right font-weight-bold">Height</ion-label>
+                            </ion-col>
+                            <ion-col col-8>
+                                <ion-label>{{ (pokemon.height / 10) | number:'1.0-1' }}m</ion-label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="border-bottom: groove;">
+                            <ion-col col-4>
+                                <ion-label class="text-right font-weight-bold">Weight</ion-label>
+                            </ion-col>
+                            <ion-col col-8>
+                                <ion-label>
+                                    {{ (pokemon.weight / 10) | number:'1.0-1' }} kg
+                                    ({{ (pokemon.weight / 10 * 2.20462) | number:'1.0-1' }} lbs.)
+                                </ion-label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="border-bottom: groove;">
+                            <ion-col col-4>
+                                <ion-label class="text-right font-weight-bold">Abilities</ion-label>
+                            </ion-col>
+                            <ion-col col-8>
+                                <ion-label>
+                                    <div *ngFor="let ability of getAbilities()">
+                                        {{ ability.ability.name }}
+                                    </div>
+                                </ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-title>Status Básicos</ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <div *ngFor="let stat of getStats()">
+                                <p><strong>{{ stat.stat.name }}:</strong> {{ stat.base_stat }}</p>
+                                <ion-progress-bar [value]="calculateProgressBarValue(stat.base_stat)"
+                                    class="custom-progress-bar ion-progress-bar-striped">
+                                </ion-progress-bar>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col> <ion-img class="custom-img" [src]="pokemon.sprites.other.showdown.front_default"
+                        [alt]="pokemon.name"></ion-img>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </ng-container>
 
 </ion-content>

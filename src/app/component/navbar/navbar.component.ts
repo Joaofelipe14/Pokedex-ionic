@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {}
+
+  
 
   ngOnInit() {}
+
+  isDetailRoute(): boolean {
+    return this.router.url.includes('/details'); // Verifica se a rota atual inclui '/details'
+  }
 
 }

@@ -1,0 +1,21 @@
+
+.ion-content-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  ion-label{
+    font-family: 'Karla';
+    font-weight: bold;
+    font-size: 20px;
+    color: #cccfd4;
+  }
+  
+  .custom-img {
+    max-width: 350px;
+    max-height: 300px;
+}

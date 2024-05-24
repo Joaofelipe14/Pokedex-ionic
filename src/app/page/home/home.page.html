@@ -1,25 +1,27 @@
 <ion-content>
   <app-navbar></app-navbar>
 
-  <app-filter (typeSelected)="onTypeSeleceted($event)"   (pokemonSelected)="onPokemonSelected($event)" 
-  (FavoritesSelected)="onShowFavorites()"></app-filter>
+  <app-filter (typeSelected)="onTypeSeleceted($event)" (pokemonSelected)="onPokemonSelected($event)"
+    (FavoritesSelected)="onShowFavorites()"></app-filter>
 
 
-  
 
-  <ion-grid>
-    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+  <ion-grid class="ion-align-items-center">
+    <ion-row *ngIf="isLoading" class="ion-justify-content-center">
+      <ion-spinner name="custom"></ion-spinner>
+    </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
       <ion-col size="12" size-md="6" size-xl="4" *ngFor="let pokemon of pokemons">
 
-        <app-pokemon-card (updateFarovitePokemon)="onUpdateFarovitePokemon()" [pokemonFavoritList]="pokemonFavoritList"  [pokemon]="pokemon" ></app-pokemon-card>
+        <app-pokemon-card (updateFarovitePokemon)="onUpdateFarovitePokemon()" [pokemonFavoritList]="pokemonFavoritList"
+          [pokemon]="pokemon"></app-pokemon-card>
 
       </ion-col>
     </ion-row>
-  
+
   </ion-grid>
-  
-<ion-row class="ion-justify-content-center">
+
+  <ion-row class="ion-justify-content-center">
     <ion-col size="12" size-lg="10">
       <ion-toolbar color='transparent' class="ion-justify-content-center">
         <ion-buttons slot="start">
@@ -32,7 +34,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-col>
-  </ion-row> 
+  </ion-row>
 
 
 

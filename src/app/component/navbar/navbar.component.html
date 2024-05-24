@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar color="warning">
+    <ion-buttons slot="start" *ngIf="isDetailRoute()"> <!-- Verifica se está na rota de detalhes -->
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title class="ion-text-end">
-      <img src="../../assets/logo.svg" alt="Logo" class="logo-img"> <!-- Aplique a classe logo-img à imagem -->
+      <img src="../../assets/logo.svg" alt="Logo" class="logo-img">
     </ion-title>
   </ion-toolbar>
 </ion-header>
