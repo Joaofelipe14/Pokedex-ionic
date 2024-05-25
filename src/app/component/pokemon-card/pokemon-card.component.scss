@@ -1,16 +1,10 @@
-.custom-card,
-.custom-text {
+.custom-card {
     font-family: 'Karla';
     font-style: normal;
+    font-size: 15px;
 }
 
-.custom-text {
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 41px;
-    letter-spacing: 3px;
 
-}
 
 
 .stat-row {
@@ -61,8 +55,14 @@
 }
 
 .favorite-icon {
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
+}
+
+.conteiner-favorite{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .favorite {

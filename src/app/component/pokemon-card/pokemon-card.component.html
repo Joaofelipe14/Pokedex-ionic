@@ -2,8 +2,12 @@
 
   <ion-row class="ion-justify-content-around">
     <ion-col size="6">
-      <div>
+      <div class="conteiner-favorite">
         #{{ pokemon.id }}
+             <ion-icon [name]="isFavorite(pokemon.name) ? 'star' : 'star-outline'" (click)="toggleFavorite(pokemon.name)"
+            [class.favorite]="isFavorite(pokemon.name)" [class.not-favorite]="!isFavorite(pokemon.name)"
+            class="favorite-icon">
+          </ion-icon>
       </div>
 
       <ion-card-header class="card-header">
@@ -12,10 +16,7 @@
           <ion-card-title class="title">
             {{ pokemon.name }}
           </ion-card-title>
-          <ion-icon [name]="isFavorite(pokemon.name) ? 'star' : 'star-outline'" (click)="toggleFavorite(pokemon.name)"
-            [class.favorite]="isFavorite(pokemon.name)" [class.not-favorite]="!isFavorite(pokemon.name)"
-            class="favorite-icon">
-          </ion-icon>
+     
         </div>
       </ion-card-header>
       <ion-card-subtitle>
