@@ -114,12 +114,3 @@ $general: ('black', $black), ('white', $white), ('grass', $grass), ('grass-light
     width: 45px;
     height: 45px;
   }
-
-
-  /* global.scss */
-@media (min-width: 520px) {
-  .padding-large {
-    padding-left: var(--ion-padding-horizontal);
-    padding-right: var(--ion-padding-horizontal);
-  }
-}

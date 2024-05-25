@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
-import { PokemonDetail, PokemonList } from '../model/pokemon.model';
+import { PokemonDetail, PokemonEvolution, PokemonList, PokemonSpecies } from '../model/pokemon.model';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonService {
@@ -14,6 +14,22 @@ export class PokemonService {
     return this.http.get<any>(`${this.baseUrl}pokemon?offset=${offset}&limit=${limit}`)
       .pipe(
         map(response => response.results),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  getPokemonSpecies(name: string): Observable<PokemonSpecies> {
+    return this.http.get<any>(`${this.baseUrl}pokemon-species/${name}`)
+      .pipe(
+        map(response => response),
+        catchError(error => this.handleError(error))
+      );
+  }
+
+  getPokemonsEvolution(url: string): Observable<PokemonEvolution> {
+    return this.http.get<any>(url)
+      .pipe(
+        map(response => response),
         catchError(error => this.handleError(error))
       );
   }
