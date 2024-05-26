@@ -4,7 +4,7 @@ import { forkJoin } from 'rxjs';
 import { PokemonDetail, PokemonList } from '../../model/pokemon.model';
 import { PokemonService } from '../../service/pokemon.service';
 import { PokemonFavoritesService } from '../../service/pokemon-favorites.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
+import { ModalAbilityComponent } from 'src/app/component/modal-ability/modal-ability.component';
 import { Ability, PokemonDetail, Stats, Types } from 'src/app/model/pokemon.model';
 import { NextEvolution, PoekmonEvolution } from 'src/app/model/pokemonEvolution.model';
 import { PokemonSpecies } from 'src/app/model/pokemonSpecies.model';
@@ -22,7 +24,7 @@ export class DetailsPage implements OnInit {
   isloading: boolean = true
   listPokemon: { name: string, lvlmim: number | undefined }[] = [];
 
-  constructor(private route: ActivatedRoute, private pokemonService: PokemonService) {
+  constructor(private route: ActivatedRoute, private pokemonService: PokemonService, private modalController: ModalController) {
 
   }
 
@@ -195,9 +197,21 @@ export class DetailsPage implements OnInit {
 
   }
 
-  totalBaseStats: number = 0;
-
   calculateTotalBaseStats() {
     return this.pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0);
+  }
+
+  async openModal(abilityName: string) {
+
+    const typeSlot1 = this.getTypes().find(type => type.slot = 1);
+    const ability = {
+      abilityName: abilityName,
+      type: typeSlot1?.type.name
+    };
+    const modal = await this.modalController.create({
+      component: ModalAbilityComponent,
+      componentProps: { ability: ability }
+    });
+    return await modal.present();
   }
 }

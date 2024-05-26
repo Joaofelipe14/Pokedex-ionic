@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">{{ability.abilityName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="custom-modal-content">
+    <div *ngIf="abilityData" class="ion-text-center">
+      <h1 class="tag {{'bg-color-'+ ability.type + '-light'}}">Short Effect</h1>
+      <p>{{ abilityData.short_effect }}</p>
+      <h1  class="tag {{'bg-color-'+ ability.type + '-light'}}" >Effect</h1>
+      <p>{{ abilityData.effect }}</p>
+    </div>
+    <ion-row *ngIf="!abilityData" class="ion-justify-content-center">
+      <ion-spinner name="custom"></ion-spinner>
+    </ion-row>
+  </div>
+</ion-content>

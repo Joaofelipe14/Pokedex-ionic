@@ -67,7 +67,7 @@
                                             <ion-label class="attributes">Abilities</ion-label>
                                             <ion-label class="attributes-value">
                                                 <div *ngFor="let ability of getAbilities(); let i = index">
-                                                    <div class="tag  {{getColorByType(i)}}">
+                                                    <div  (click)="openModal(ability.ability.name )" class="tag cursor-pointer {{getColorByType(i)}}">
                                                         {{ ability.ability.name }}
                                                     </div>
                                                 </div>
@@ -78,7 +78,7 @@
                                             <ion-label class="attributes">Type</ion-label>
                                             <ion-label class="attributes-value">
                                                 <div *ngFor="let types of getTypes()"
-                                                    class="tag {{'bg-color-'+ types.type.name + '-light'}}">
+                                                  class="tag {{'bg-color-'+ types.type.name + '-light'}}">
                                                     {{ types.type.name }}
                                                 </div>
                                             </ion-label>
@@ -144,3 +144,4 @@
     </ng-container>
 
 </ion-content>
+

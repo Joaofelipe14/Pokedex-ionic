@@ -60,6 +60,14 @@ export class PokemonService {
       );
   }
 
+  getAability(nameAbilty: string): Observable<any[]> {
+    return this.http.get<any>(`${this.baseUrl}ability/${nameAbilty}`)
+      .pipe(
+        map(response => response),
+        catchError(error => this.handleError(error))
+      );
+  }
+
   private handleError(error: any): Observable<any> {
     console.error('Ocorreu um erro:', error);
     return throwError('Erro ocorreu na solicitação. Por favor, tente novamente mais tarde.');

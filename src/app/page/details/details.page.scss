@@ -16,17 +16,6 @@
 
 }
 
-.tag {
-  text-align: center;
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 11px;
-  background: #73D677;
-  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
-  color: #fff;
-  // max-width: 80px;
-
-}
 
 .container-arrow {
   display: flex;
@@ -62,28 +51,7 @@
   max-height: 400px;
 }
 
-h1 {
-  font-family: 'karla';
-}
 
-p {
-  font-family: 'karla';
-}
-
-.description {
-  font-size: 25px;
-  font-family: 'Karla', Helvetica, sans-serif;
-  font-style: normal;
-}
-
-.title {
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 41px;
-  letter-spacing: 3px;
-  font-family: 'Karla';
-  font-style: normal;
-}
 
 .custom-progress-bar {
   height: 10px;
@@ -108,6 +76,10 @@ ion-progress-bar{
   min-width: 100%;
 }
 
+
+.cursor-pointer{
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 869px) {
 
