@@ -62,9 +62,9 @@ export interface PokemonList {
     generation:{
       name: string
     }
-    flavor_text_entries:{
+    flavor_text_entries:[{
       flavor_text:string
-    }
+    }]
   }
 
   export interface PokemonEvolution {

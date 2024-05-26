@@ -1,21 +1,86 @@
-
 .ion-content-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.title::first-letter {
+  text-transform: uppercase;
+}
+
+.special-char {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.flex {
+  display: flex;
+}
+
+.custom-img{
+  max-height: 400px;
+}
+
+h1{
+  font-family: 'karla';
+}
+
+p{
+  font-family: 'karla';
+}
+
+.description {
+  font-size: 25px;
+  font-family: 'Karla', Helvetica, sans-serif;
+  font-style: normal;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 41px;
+  letter-spacing: 3px;
+  font-family: 'Karla';
+  font-style: normal;
+}
+
+.custom-progress-bar {
+  height: 10px;
+  border-radius: 20px;
+
+}
+
+
+@media only screen and (max-width: 869px) {
+
+  .mycard {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    gap: 10px;
     flex-direction: column;
+    margin-bottom: 10px;
   }
 
-  ion-label{
-    font-family: 'Karla';
-    font-weight: bold;
-    font-size: 20px;
-    color: #cccfd4;
+  .arrow-icon {
+    display: block;
+    transform: rotate(90deg);
+    /* Rotaciona a seta para baixo */
   }
-  
-  .custom-img {
-    max-width: 350px;
-    max-height: 300px;
+
+}
+
+
+.custom-card {
+  --background: #f0f0f0;
+  /* Cor de fundo personalizada */
+}
+
+.card-info {
+  min-height: 100%;
+}
+
+.my-card {
+  min-height: 100%;
+  min-width: 100%;
 }
