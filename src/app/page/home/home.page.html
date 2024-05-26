@@ -1,7 +1,7 @@
 <ion-content>
-  <app-navbar></app-navbar>
+  <app-navbar id="top"></app-navbar>
 
-  <app-filter (typeSelected)="onTypeSeleceted($event)" (pokemonSelected)="onPokemonSelected($event)"
+  <app-filter   (typeSelected)="onTypeSeleceted($event)" (pokemonSelected)="onPokemonSelected($event)"
     (FavoritesSelected)="onShowFavorites()"></app-filter>
 
   <ion-grid class="ion-align-items-center">
@@ -13,7 +13,7 @@
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
       <ion-col size="12" size-md="6" size-xl="4" *ngFor="let pokemon of pokemons">
 
-        <app-pokemon-card (updateFarovitePokemon)="onUpdateFarovitePokemon()" [pokemonFavoritList]="pokemonFavoritList"
+        <app-pokemon-card 
           [pokemon]="pokemon"></app-pokemon-card>
 
       </ion-col>
@@ -28,11 +28,13 @@
             class="custom-button">Anterior</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-          <ion-button (click)="nextPage()" [disabled]="isLoading" [disabled]="hasMorePokemons()"
+          <ion-button  (click)="nextPage()" [disabled]="isLoading" [disabled]="hasMorePokemons()"
             class="custom-button">Próximo</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-col>
   </ion-row>
+
+
 
 </ion-content>

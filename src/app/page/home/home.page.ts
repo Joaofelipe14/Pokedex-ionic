@@ -26,7 +26,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.loadPokemons();
-    this.loadListFavorites()
   }
 
  
@@ -36,18 +35,14 @@ export class HomePage implements OnInit {
   }
 
   onShowFavorites(){
-    this.showFavoritesPokemons()
+    this.loadListFavorites()
+
   }
 
   onTypeSeleceted(type: string){
    type !=='all' ?  this.loadPokemonsByType(type) : this.loadPokemons()
   }
 
-
-  onUpdateFarovitePokemon(){
-    this.loadListFavorites()
-  
-  }
 
   /*Funcao para carregar e filtrar lista de pokemons*/
   loadListFavorites() {
@@ -57,7 +52,8 @@ export class HomePage implements OnInit {
         url: ''
       }));
       this.pokemonFavoritList = pokemonFavoritList
-      
+      this.showFavoritesPokemons()
+
     }).catch(error => {
       console.error('Erro ao recuperar a lista de pokémons salvos:', error);
     });
@@ -98,8 +94,9 @@ export class HomePage implements OnInit {
     if (this.pokemonFavoritList.length > 0) {
       this.isLoading = true;
       this.loadPokemonDetail(this.pokemonFavoritList.slice(this.offset, this.limit).map(pokemon => pokemon.name))
+
     } else {
-      console.log('ainda sem pokemon favorito.')
+     alert('ainda sem pokemon favorito.')
     }
 
   }
@@ -112,6 +109,8 @@ export class HomePage implements OnInit {
       this.pokemons = pokemonDetails;
       this.isLoading = false;
     });
+
+
   }
 
 
@@ -140,14 +139,24 @@ export class HomePage implements OnInit {
   nextPage() {
     this.offset += this.limit;
     this.loadDataPokemonNavigate()
+    this.scrollToTop()
+
   }
 
   previousPage() {
     if (this.offset >= this.limit) {
       this.offset -= this.limit;
       this.loadDataPokemonNavigate()
+      this.scrollToTop()
     }
   }
+
+    scrollToTop(): void {
+      const pageTop = document.getElementById('top');
+      if (pageTop) {
+        pageTop.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
 
 
 
