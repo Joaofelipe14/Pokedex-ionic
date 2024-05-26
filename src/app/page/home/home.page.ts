@@ -4,6 +4,7 @@ import { forkJoin } from 'rxjs';
 import { PokemonDetail, PokemonList } from '../../model/pokemon.model';
 import { PokemonService } from '../../service/pokemon.service';
 import { PokemonFavoritesService } from '../../service/pokemon-favorites.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomePage implements OnInit {
   offset: number = 0;
   limit: number = 9;
 
-  constructor(private pokemonFavoritesService : PokemonFavoritesService, private pokemonService: PokemonService) { }
+  constructor(private pokemonFavoritesService : PokemonFavoritesService, private pokemonService: PokemonService,private alertController: AlertController) { }
 
   ngOnInit() {
     this.loadPokemons();
@@ -96,7 +97,7 @@ export class HomePage implements OnInit {
       this.loadPokemonDetail(this.pokemonFavoritList.slice(this.offset, this.limit).map(pokemon => pokemon.name))
 
     } else {
-     alert('ainda sem pokemon favorito.')
+        this.presentAlert()
     }
 
   }
@@ -158,6 +159,14 @@ export class HomePage implements OnInit {
       }
     }
 
-
+    async presentAlert() {
+      const alert = await this.alertController.create({
+        header: 'Choose your favorite',
+        message: 'No favorite Pokémon selected yet.',
+        buttons: ['close'],
+      });
+  
+      await alert.present();
+    }
 
 }

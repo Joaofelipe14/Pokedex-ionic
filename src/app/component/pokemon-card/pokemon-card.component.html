@@ -1,13 +1,13 @@
-<ion-card  size="6" class="custom-card">
+<ion-card size="6" class="custom-card">
 
   <ion-row class="ion-justify-content-around">
     <ion-col size="6">
       <div class="conteiner-favorite">
         #{{ pokemon.id }}
-             <ion-icon [name]="isFavorite(pokemon.name) ? 'star' : 'star-outline'" (click)="toggleFavorite(pokemon.name)"
-            [class.favorite]="isFavorite(pokemon.name)" [class.not-favorite]="!isFavorite(pokemon.name)"
-            class="favorite-icon">
-          </ion-icon>
+        <ion-icon [name]="isFavorite(pokemon.name) ? 'star' : 'star-outline'" (click)="toggleFavorite(pokemon.name)"
+          [class.favorite]="isFavorite(pokemon.name)" [class.not-favorite]="!isFavorite(pokemon.name)"
+          class="favorite-icon">
+        </ion-icon>
       </div>
 
       <ion-card-header class="card-header">
@@ -16,7 +16,7 @@
           <ion-card-title class="title">
             {{ pokemon.name }}
           </ion-card-title>
-     
+
         </div>
       </ion-card-header>
       <ion-card-subtitle>
@@ -41,7 +41,6 @@
           </ion-col>
         </ion-row>
 
-
         <!-- Tipos -->
         <ion-row class="ion-justify-content-around">
           <ion-col col="6" *ngFor="let type of pokemon.types"
@@ -53,11 +52,11 @@
 
     </ion-col>
 
-            <!-- Imagem pokemon e background -->
-
-    <ion-col   (click)="goToDetails(pokemon.name)" class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
-
-      <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'" alt="Background Image" >
+    <!-- Imagem pokemon e background -->
+    <ion-col (click)="goToDetails(pokemon.name)"
+      class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
+      <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'"
+        alt="Background Image">
       <img class="img" [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name">
 
     </ion-col>

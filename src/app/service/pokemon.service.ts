@@ -20,8 +20,8 @@ export class PokemonService {
       );
   }
 
-  getPokemonSpecies(name: string): Observable<PokemonSpecies> {
-    return this.http.get<any>(`${this.baseUrl}pokemon-species/${name}`)
+  getPokemonSpecies(url: string): Observable<PokemonSpecies> {
+    return this.http.get<any>(url)
       .pipe(
         map(response => response),
         catchError(error => this.handleError(error))

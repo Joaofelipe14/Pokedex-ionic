@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Ability, PokemonDetail, Stats, Types } from 'src/app/model/pokemon.model';
-import {  NextEvolution, PoekmonEvolution } from 'src/app/model/pokemonEvolution.model';
+import { NextEvolution, PoekmonEvolution } from 'src/app/model/pokemonEvolution.model';
 import { PokemonSpecies } from 'src/app/model/pokemonSpecies.model';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
@@ -32,8 +32,6 @@ export class DetailsPage implements OnInit {
 
       /*Carrega os detalhes do pokemon*/
       this.getPokemonDetail(this.pokemonName)
-      /*Faz a requisiao de species e evolution, qnd termina a requisicao isloading vira falso e pagina carrega */
-      this.getPokemonSpecies(this.pokemonName)
 
 
     });
@@ -47,16 +45,19 @@ export class DetailsPage implements OnInit {
           this.pokemon = pokemonDetail
           this.calculateMaxStatValue(this.pokemon.stats)
 
+          /*Faz a requisiao de species e evolution, qnd termina a requisicao isloading vira falso e pagina carrega */
+          this.getPokemonSpecies(this.pokemon.species.url)
+
+
         },
         (error: any) => {
           console.error('Erro ao obter detalhes do Pokémon:', error);
-          alert('erro')
         }
       );
   }
 
-  getPokemonSpecies(name: string): void {
-    this.pokemonService.getPokemonSpecies(name).subscribe((pokemonSpecie: PokemonSpecies) => {
+  getPokemonSpecies(url: string): void {
+    this.pokemonService.getPokemonSpecies(url).subscribe((pokemonSpecie: PokemonSpecies) => {
       this.pokemonSpecie = pokemonSpecie
       this.getEvolutionChan(pokemonSpecie.evolution_chain.url)
     },

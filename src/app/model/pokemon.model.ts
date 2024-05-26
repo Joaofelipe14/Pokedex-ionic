@@ -14,6 +14,10 @@ export interface PokemonDetail {
   stats: Stats[];
   sprites: Sprites;
   cries: Cries;
+  species:{
+    name: string,
+    url: string
+  }
 }
 
 export interface Cries {
