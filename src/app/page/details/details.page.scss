@@ -1,86 +1,121 @@
 .ion-content-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  .title::first-letter {
+    text-transform: uppercase;
+  }
+  
+  .special-char {
+    font-family: Arial, Helvetica, sans-serif;
+  
+  }
+
+  .tag {
+    text-align: center;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 11px;
+    background: #73D677;
+    box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
+    color: #fff;
+    // max-width: 80px;
+
+}
+
+.container-arrow{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  gap: 10px;
-  flex-direction: column;
-}
-
-.title::first-letter {
-  text-transform: uppercase;
-}
-
-.special-char {
-  font-family: Arial, Helvetica, sans-serif;
 
 }
-
-.flex {
-  display: flex;
-}
-
-.custom-img{
-  max-height: 400px;
-}
-
-h1{
-  font-family: 'karla';
-}
-
-p{
-  font-family: 'karla';
-}
-
-.description {
-  font-size: 25px;
-  font-family: 'Karla', Helvetica, sans-serif;
-  font-style: normal;
-}
-
-.title {
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 41px;
-  letter-spacing: 3px;
-  font-family: 'Karla';
-  font-style: normal;
-}
-
-.custom-progress-bar {
-  height: 10px;
-  border-radius: 20px;
-
-}
-
-
-@media only screen and (max-width: 869px) {
-
-  .mycard {
+  
+  .flex {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  }
+  
+  .attributes {
+    font-family: 'Karla';
+    font-weight: bold;
+  }
+  
+  .attributes-value {
+    font-family: 'Karla';
+    font-weight: 300;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  
+  }
+  
+  .attributes-value ::first-letter {
+    text-transform: uppercase;
+  }
+  
+  .custom-img {
+    max-height: 400px;
+  }
+  
+  h1 {
+    font-family: 'karla';
+  }
+  
+  p {
+    font-family: 'karla';
+  }
+  
+  .description {
+    font-size: 25px;
+    font-family: 'Karla', Helvetica, sans-serif;
+    font-style: normal;
+  }
+  
+  .title {
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 41px;
+    letter-spacing: 3px;
+    font-family: 'Karla';
+    font-style: normal;
+  }
+  
+  .custom-progress-bar {
+    height: 10px;
+    border-radius: 20px;  
+    transform: rotate(180deg);
+  }
+  
+  .custom-card {
+    --background: #f0f0f0;
+  }
+  
+  .card-info {
+    min-height: 100%;
+  }
+  
+  .my-card {
+    min-height: 100%;
+    min-width: 100%;
   }
 
-  .arrow-icon {
-    display: block;
-    transform: rotate(90deg);
-    /* Rotaciona a seta para baixo */
+
+  @media only screen and (max-width: 869px) {
+  
+    .mycard {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+  
+    .arrow-icon {
+      display: block;
+      transform: rotate(90deg);
+    }
+  
   }
-
-}
-
-
-.custom-card {
-  --background: #f0f0f0;
-  /* Cor de fundo personalizada */
-}
-
-.card-info {
-  min-height: 100%;
-}
-
-.my-card {
-  min-height: 100%;
-  min-width: 100%;
-}

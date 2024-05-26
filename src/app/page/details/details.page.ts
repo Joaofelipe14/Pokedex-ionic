@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { Ability, PokemonDetail, Stats, Sprites, PokemonSpecies, PokemonEvolution, PokemonList } from 'src/app/model/pokemon.model';
+import { Ability, PokemonDetail, Stats, Types } from 'src/app/model/pokemon.model';
+import { PokemonSpecies } from 'src/app/model/pokemonSpecies.model';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
 interface Evolution {
   species: {
     name: string;
-    url: string;
   };
-  evolves_to: Evolution[];
+  evolution_details?: {
+    min_level: number;
+  }[];
+  evolves_to?: Evolution[];
 }
 
 @Component({
@@ -21,12 +24,11 @@ export class DetailsPage implements OnInit {
 
   pokemonName: string = '';
   pokemon!: PokemonDetail;
-  pokemonsEvolution: PokemonDetail[]=[]
+  pokemonsEvolution: PokemonDetail[] = []
   maxStatValue: number = 0;
   pokemonSpecie!: PokemonSpecies;
-  isloading : boolean = true
-  listPokemon: PokemonList[] = [];
-  evolvedPokemons: string[] = []; 
+  isloading: boolean = true
+  listPokemon: {name:string, lvlmim:string}[] = [];
 
   constructor(private route: ActivatedRoute, private pokemonService: PokemonService) {
 
@@ -38,7 +40,6 @@ export class DetailsPage implements OnInit {
 
       /*Carrega os detalhes do pokemon*/
       this.getPokemonDetail(this.pokemonName)
-
       /*Faz a requisiao de species e evolution, qnd termina a requisicao isloading vira falso e pagina carrega */
       this.getPokemonSpecies(this.pokemonName)
 
@@ -47,14 +48,12 @@ export class DetailsPage implements OnInit {
   }
 
 
-  getPokemonDetail(name: string):void  {
+  getPokemonDetail(name: string): void {
     this.pokemonService.getPokemonDetail(name)
       .subscribe(
         (pokemonDetail: PokemonDetail) => {
           this.pokemon = pokemonDetail
-          // console.log(this.pokemon)
           this.calculateMaxStatValue(this.pokemon.stats)
-
 
         },
         (error: any) => {
@@ -64,14 +63,10 @@ export class DetailsPage implements OnInit {
       );
   }
 
-
-  getPokemonSpecies(name: string):void {
+  getPokemonSpecies(name: string): void {
     this.pokemonService.getPokemonSpecies(name).subscribe((pokemonSpecie: PokemonSpecies) => {
       this.pokemonSpecie = pokemonSpecie
-      // console.log(pokemonSpecie.evolution_chain.url)
       this.getEvolutionChan(pokemonSpecie.evolution_chain.url)
-
-
     },
       (error: any) => {
         console.error(error);
@@ -79,16 +74,12 @@ export class DetailsPage implements OnInit {
       })
   }
 
-
-  getEvolutionChan(url: string):void {
-    this.pokemonService.getPokemonsEvolution(url).subscribe((pokemonEvolution: PokemonEvolution) => {
-      console.log(pokemonEvolution.chain)
-      this.extractEvolutions(pokemonEvolution.chain); 
+  getEvolutionChan(url: string): void {
+    this.pokemonService.getPokemonsEvolution(url).subscribe((pokemonEvolution: any) => {
+      this.extractEvolutions(pokemonEvolution.chain);
       this.loadPokemonDetail(this.listPokemon.map(pokemon => pokemon.name))
-      this.isloading= false
+      this.isloading = false
 
-
-    
     },
       (error: any) => {
         console.error(error);
@@ -104,27 +95,25 @@ export class DetailsPage implements OnInit {
     });
   }
 
-  extractEvolutions(evolutionChain: Evolution): void {
+  extractEvolutions(evolutionChain: any): void {
     if (!evolutionChain || !evolutionChain.species || !evolutionChain.species.name) {
-      return; 
+      return;
     }
-  
+
     const pokemonName = evolutionChain.species.name;
+    const minLevel = evolutionChain.evolution_details?.[0]?.min_level ?? null;
     const isPokemonInList = this.listPokemon.some(pokemon => pokemon.name === pokemonName);
-  
-    console.log(isPokemonInList)
+
     if (!isPokemonInList) {
       this.listPokemon.push({
         name: pokemonName,
-        url: evolutionChain.species.url
+        lvlmim : minLevel,
       });
     }
-      evolutionChain.evolves_to?.forEach(nextEvolution => {
+    evolutionChain.evolves_to?.forEach((nextEvolution: any) => {
       this.extractEvolutions(nextEvolution);
     });
   }
-  
-  
 
   calculateMaxStatValue(stats: Stats[]): void {
     if (!stats || stats.length === 0) {
@@ -134,16 +123,36 @@ export class DetailsPage implements OnInit {
     this.maxStatValue = Math.max(...stats.map(stat => stat.base_stat));
   }
 
-  calculateProgressBarValue(baseStat: number) {
-    return baseStat === this.maxStatValue ? 1 : '.' + (baseStat / this.maxStatValue) * 100;
+  // Retorna o valor inverso da barra de progresso com base no valor fornecido. Essa inversao é realizada por que a barra de progresso foi invertida  para uma melhor visualizacao.
+  calculateProgressBarValue(baseStat: number): string {
+    const value = baseStat === 0 ? 0 : 100 - ((baseStat / this.maxStatValue) * 100);
+    const formattedValue = value < 10 ? '0' + value.toFixed(2) : value.toFixed(2);
+    return formattedValue;
   }
 
   getAbilities(): Ability[] {
-    return this.pokemon ? this.pokemon.abilities : [];
+    return this.pokemon.abilities;
   }
-
   getStats(): Stats[] {
-    return this.pokemon ? this.pokemon.stats : [];
+    const statNames: { [key: string]: string } = {
+      'hp':'HP',
+      'attack': 'Attack',
+      'defense': 'Defense',
+      'special-attack': 'Special Attack',
+      'special-defense': 'Special Defense',
+      'speed': 'Speed'
+    };
+  
+    return this.pokemon.stats.map(stat => {
+      const name = statNames[stat.stat.name] ;
+      return { ...stat, stat: { name } };
+    });
+  }
+  
+  
+
+  getTypes(): Types[] {
+    return this.pokemon.types
   }
 
   formatGenerationName(name: string): string {
@@ -161,12 +170,37 @@ export class DetailsPage implements OnInit {
     const generationPart = name.split('-')[1];
     const formattedGeneration = romanNumerals[generationPart.toLowerCase()];
 
-    return `${formattedGeneration} GEN`;
+    return `${formattedGeneration}`;
   }
 
-   getTextEnglish(TextEntries: any[]): string | null {
+  getTextEnglish(TextEntries: any[]): string | null {
     const englishEntry = TextEntries.find(entry => entry.language.name === 'en');
-    return englishEntry ? englishEntry.flavor_text : null;
+
+    const controlCharsRegex = /[\f]/g;
+    const cleanedText = englishEntry.flavor_text
+      .replace(controlCharsRegex, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    return cleanedText;
   }
 
+  /*Atribuindo o background para habilidades se baseando pela tipo do pokemo*/
+  getColorByType(index: number): string {
+
+    const mainType = this.getTypes()[0].type.name
+
+    if (index % 2 == 0) {
+      return `bg-color-${mainType}-light`;
+    } else {
+      return `bg-color-${mainType}`;
+    }
+
+  }
+
+  totalBaseStats: number = 0;
+
+  calculateTotalBaseStats() {
+    return this.pokemon.stats.reduce((total, stat) => total + stat.base_stat, 0);
+  }
 }

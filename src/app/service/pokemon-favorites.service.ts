@@ -20,7 +20,7 @@ export class PokemonFavoritesService {
 
   /**
    * Inicializa o banco de dados IndexedDB
-   * @returns {Promise<IDBPDatabase<PokemonDB>>} - Banco de dados inicializado
+   * @returns {Promise<IDBPDatabase<PokemonDB>>} 
    */
   private async initDB(): Promise<IDBPDatabase<PokemonDB>> {
     return openDB<PokemonDB>('pokemon-db', 1, {
@@ -32,7 +32,7 @@ export class PokemonFavoritesService {
 
   /**
    * Recupera a lista de pokémons favoritados do IndexedDB
-   * @returns {Promise<string[]>} - Lista de nomes de pokémons favoritados
+   * @returns {Promise<string[]>} 
    */
   async getFavorites(): Promise<string[]> {
     const db = await this.dbPromise;
@@ -42,7 +42,7 @@ export class PokemonFavoritesService {
 
   /**
    * Adiciona um pokémon à lista de favoritos
-   * @param {string} name - Nome do pokémon a ser favoritado
+   * @param {string} name
    */
   async addFavorite(name: string): Promise<void> {
     const db = await this.dbPromise;
@@ -51,7 +51,7 @@ export class PokemonFavoritesService {
 
   /**
    * Remove um pokémon da lista de favoritos
-   * @param {string} name - Nome do pokémon a ser removido
+   * @param {string} name 
    */
   async removeFavorite(name: string): Promise<void> {
     const db = await this.dbPromise;
@@ -60,8 +60,8 @@ export class PokemonFavoritesService {
 
   /**
    * Verifica se um pokémon está na lista de favoritos
-   * @param {string} name - Nome do pokémon a ser verificado
-   * @returns {Promise<boolean>} - Verdadeiro se o pokémon estiver favoritado, falso caso contrário
+   * @param {string} name 
+   * @returns {Promise<boolean>} 
    */
   async isFavorite(name: string): Promise<boolean> {
     const db = await this.dbPromise;

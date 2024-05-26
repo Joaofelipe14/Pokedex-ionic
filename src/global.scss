@@ -102,20 +102,27 @@ $general: ('black', $black), ('white', $white), ('grass', $grass), ('grass-light
   
     .bg-color-#{$name} {
       background-color: $value !important;
+      --progress-background: #{$value} !important;
+      --background: #e9ecef;
     }
   
     .color-#{$name} {
       color: $value !important;
     }
+
   }
-  
+
   ion-spinner[name="custom"] {
     content: url('assets/loading.gif');
     width: 45px;
     height: 45px;
   }
 
-
+  ion-icon[name="arrow-custom"] {
+    content: url('assets/right-arrow.png');
+    width: 45px;
+    height: 45px;
+  }
 
   ion-grid{
     max-width: 1800px;

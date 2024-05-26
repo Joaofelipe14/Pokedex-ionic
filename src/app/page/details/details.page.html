@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
 
     <ion-grid *ngIf="isloading" class="ion-content-centered">
-        <ion-label> Loading
+        <ion-label class="title"> Loading
         </ion-label>
         <ion-spinner name="custom"></ion-spinner>
     </ion-grid>
@@ -10,13 +10,13 @@
         <app-navbar></app-navbar>
 
 
-        <!-- Nome  e geracao -->
         <ion-card class="ion-padding-top custom-card">
-            <div class="title ion-text-center">
-                <strong>{{pokemonName}}</strong> generation : <span class="special-char">
-                    {{formatGenerationName(pokemonSpecie.generation.name)}}</span>
-            </div>
 
+            <!-- Nome  e geracao -->
+            <div class="title ion-text-center">
+                <strong>{{pokemonName}}</strong> <span class="special-char">
+                    {{formatGenerationName(pokemonSpecie.generation.name)}} generation</span>
+            </div>
             <!-- text entries e gif -->
             <ion-grid>
                 <ion-row class="ion-wrap ion-container">
@@ -44,29 +44,42 @@
 
                     <ion-col size="12" size-md="6">
                         <ion-row>
-                            <ion-col size="6" size-xl="4">
+                            <ion-col size="12" size-md="6" size-xl="5">
                                 <ion-card class="card-info">
                                     <ion-list lines="none">
-                                        <ion-item>
-                                            <ion-label>#</ion-label>
-                                            <ion-label>{{ pokemon.id }}</ion-label>
+                                        <ion-item class="attributes">
+                                            <ion-label>#{{ pokemon.id }}</ion-label>
                                         </ion-item>
 
                                         <ion-item>
-                                            <ion-label>Height</ion-label>
-                                            <ion-label>{{ (pokemon.height / 10) | number:'1.0-1' }}m</ion-label>
+                                            <ion-label class="attributes">Height</ion-label>
+                                            <ion-label class="attributes-value">{{ (pokemon.height / 10) |
+                                                number:'1.01-2' }} m</ion-label>
                                         </ion-item>
 
                                         <ion-item>
-                                            <ion-label>Weight</ion-label>
-                                            <ion-label>{{ (pokemon.weight / 10) | number:'1.0-1' }} kg</ion-label>
+                                            <ion-label class="attributes">Weight</ion-label>
+                                            <ion-label class="attributes-value">{{ (pokemon.weight / 10) |
+                                                number:'1.01-2' }} kg</ion-label>
                                         </ion-item>
 
                                         <ion-item>
-                                            <ion-label>Abilities</ion-label>
-                                            <ion-label>
-                                                <div *ngFor="let ability of getAbilities()">
-                                                    {{ ability.ability.name }}
+                                            <ion-label class="attributes">Abilities</ion-label>
+                                            <ion-label class="attributes-value">
+                                                <div *ngFor="let ability of getAbilities(); let i = index">
+                                                    <div class="tag  {{getColorByType(i)}}">
+                                                        {{ ability.ability.name }}
+                                                    </div>
+                                                </div>
+                                            </ion-label>
+                                        </ion-item>
+
+                                        <ion-item>
+                                            <ion-label class="attributes">Type</ion-label>
+                                            <ion-label class="attributes-value">
+                                                <div *ngFor="let types of getTypes()"
+                                                    class="tag {{'bg-color-'+ types.type.name + '-light'}}">
+                                                    {{ types.type.name }}
                                                 </div>
                                             </ion-label>
                                         </ion-item>
@@ -74,21 +87,27 @@
                                     </ion-list>
                                 </ion-card>
                             </ion-col>
-                            <ion-col size="6" size-xl="8">
+
+                            <ion-col size="12" size-md="6" size-xl="7">
+
                                 <ion-card class="card-info">
                                     <ion-card-header>
-                                        <ion-card-title>Status Básicos</ion-card-title>
+                                        <ion-card-title>Base stats</ion-card-title>
                                     </ion-card-header>
 
                                     <ion-card-content>
                                         <div *ngFor="let stat of getStats()">
-                                            <p><strong>{{ stat.stat.name }}:</strong> {{ stat.base_stat }}</p>
-                                            <ion-progress-bar [value]="calculateProgressBarValue(stat.base_stat)"
-                                                class="custom-progress-bar ion-progress-bar-striped">
+                                            <p class="attributes-value">{{ stat.stat.name }}: {{ stat.base_stat }}</p>
+                                            <ion-progress-bar [buffer]="'.'+calculateProgressBarValue(stat.base_stat)"
+                                                class="custom-progress-bar ion-progress-bar-animated {{getColorByType(2)}} ion-progress-bar-striped">
+                                                <span>{{ stat.base_stat }}</span>
                                             </ion-progress-bar>
                                         </div>
-                                    </ion-card-content>
+                                        <p class="attributes-value">
+                                            Total: {{this.calculateTotalBaseStats()}}
+                                        </p>
 
+                                    </ion-card-content>
                                 </ion-card>
                             </ion-col>
 
@@ -96,29 +115,34 @@
                     </ion-col>
 
                 </ion-row>
+            </ion-grid>
 
-                <!-- Cadeia de evolução -->
 
-                <ion-row size="12" class="ion-align-items-center ion-justify-content-center mycard">
-                    
-                    <ion-col size="12" class="ion-text-center">
-                        <h1>Evolution chain</h1>
-                        <p *ngIf="pokemonsEvolution.length ==1">This pokemon does not evolve.</p>
-                    </ion-col>
-                    <ion-row *ngIf="pokemonsEvolution.length==0" class="ion-justify-content-center">
-                        <ion-spinner name="custom"></ion-spinner>
-                    </ion-row>
+            <!-- Cadeia de evolução -->
 
-                    <ng-container *ngFor="let pokemon of pokemonsEvolution; let i = index">
-                        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
-                        <ion-icon *ngIf="i < pokemonsEvolution.length - 1" name="arrow-forward"
-                            class="arrow-icon"></ion-icon>
-                    </ng-container>
+            <ion-row size="12" class="ion-align-items-center ion-justify-content-center mycard">
+
+                <ion-col size="12" class="ion-text-center">
+                    <h1>Evolution chain</h1>
+                    <p *ngIf="pokemonsEvolution.length ==1">This pokemon does not evolve.</p>
+                </ion-col>
+                <ion-row *ngIf="pokemonsEvolution.length==0" class="ion-justify-content-center">
+                    <ion-spinner name="custom"></ion-spinner>
                 </ion-row>
 
+                <ng-container *ngFor="let pokemon of pokemonsEvolution; let i = index">
+                    <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+                    <div class="container-arrow">
+                    <p *ngIf="i < listPokemon.length - 1" class="attributes">Lvl mim: {{ listPokemon[i+1].lvlmim }}
+                    </p>
+                    <ion-icon *ngIf="i < pokemonsEvolution.length - 1" name="arrow-custom"
+                        class="arrow-icon"></ion-icon>
+                </div>
+                </ng-container>
+            </ion-row>
 
 
-            </ion-grid>
+
         </ion-card>
     </ng-container>
 
