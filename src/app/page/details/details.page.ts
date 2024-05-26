@@ -2,18 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Ability, PokemonDetail, Stats, Types } from 'src/app/model/pokemon.model';
+import {  NextEvolution, PoekmonEvolution } from 'src/app/model/pokemonEvolution.model';
 import { PokemonSpecies } from 'src/app/model/pokemonSpecies.model';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
-interface Evolution {
-  species: {
-    name: string;
-  };
-  evolution_details?: {
-    min_level: number;
-  }[];
-  evolves_to?: Evolution[];
-}
 
 @Component({
   selector: 'app-details',
@@ -28,7 +20,7 @@ export class DetailsPage implements OnInit {
   maxStatValue: number = 0;
   pokemonSpecie!: PokemonSpecies;
   isloading: boolean = true
-  listPokemon: {name:string, lvlmim:string}[] = [];
+  listPokemon: { name: string, lvlmim: number | undefined }[] = [];
 
   constructor(private route: ActivatedRoute, private pokemonService: PokemonService) {
 
@@ -75,7 +67,7 @@ export class DetailsPage implements OnInit {
   }
 
   getEvolutionChan(url: string): void {
-    this.pokemonService.getPokemonsEvolution(url).subscribe((pokemonEvolution: any) => {
+    this.pokemonService.getPokemonsEvolution(url).subscribe((pokemonEvolution: PoekmonEvolution) => {
       this.extractEvolutions(pokemonEvolution.chain);
       this.loadPokemonDetail(this.listPokemon.map(pokemon => pokemon.name))
       this.isloading = false
@@ -95,22 +87,26 @@ export class DetailsPage implements OnInit {
     });
   }
 
-  extractEvolutions(evolutionChain: any): void {
-    if (!evolutionChain || !evolutionChain.species || !evolutionChain.species.name) {
+  extractEvolutions(Evolution: NextEvolution): void {
+    if (!Evolution || !Evolution.species || !Evolution.species.name) {
       return;
     }
 
-    const pokemonName = evolutionChain.species.name;
-    const minLevel = evolutionChain.evolution_details?.[0]?.min_level ?? null;
+    const pokemonName = Evolution.species.name;
+    const minLevel = Evolution.evolution_details?.[0]?.min_level
     const isPokemonInList = this.listPokemon.some(pokemon => pokemon.name === pokemonName);
 
     if (!isPokemonInList) {
       this.listPokemon.push({
         name: pokemonName,
-        lvlmim : minLevel,
+        lvlmim: minLevel,
       });
     }
-    evolutionChain.evolves_to?.forEach((nextEvolution: any) => {
+
+    console.log(this.listPokemon)
+
+    /*Chama sempre a chave evolves_to ate termina todas as evolucoes*/
+    Evolution.evolves_to?.forEach((nextEvolution: any) => {
       this.extractEvolutions(nextEvolution);
     });
   }
@@ -135,21 +131,21 @@ export class DetailsPage implements OnInit {
   }
   getStats(): Stats[] {
     const statNames: { [key: string]: string } = {
-      'hp':'HP',
+      'hp': 'HP',
       'attack': 'Attack',
       'defense': 'Defense',
       'special-attack': 'Special Attack',
       'special-defense': 'Special Defense',
       'speed': 'Speed'
     };
-  
+
     return this.pokemon.stats.map(stat => {
-      const name = statNames[stat.stat.name] ;
+      const name = statNames[stat.stat.name];
       return { ...stat, stat: { name } };
     });
   }
-  
-  
+
+
 
   getTypes(): Types[] {
     return this.pokemon.types

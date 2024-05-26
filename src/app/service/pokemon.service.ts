@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
 import { PokemonDetail, PokemonList } from '../model/pokemon.model';
 import { PokemonSpecies } from '../model/pokemonSpecies.model';
+import {  PoekmonEvolution } from '../model/pokemonEvolution.model';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonService {
@@ -27,7 +28,7 @@ export class PokemonService {
       );
   }
 
-  getPokemonsEvolution(url: string): Observable<any> {
+  getPokemonsEvolution(url: string): Observable<PoekmonEvolution> {
     return this.http.get<any>(url)
       .pipe(
         map(response => response),
