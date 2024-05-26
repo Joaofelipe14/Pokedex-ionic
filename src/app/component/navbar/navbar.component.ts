@@ -15,7 +15,11 @@ export class NavbarComponent  implements OnInit {
   ngOnInit() {}
 
   isDetailRoute(): boolean {
-    return this.router.url.includes('/details'); // Verifica se a rota atual inclui '/details'
+    return this.router.url.includes('/details'); 
+  }
+
+  goHome(): void {
+    this.router.navigateByUrl('/home');
   }
 
 }

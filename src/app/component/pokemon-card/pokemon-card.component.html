@@ -44,16 +44,17 @@
 
         <!-- Tipos -->
         <ion-row class="ion-justify-content-around">
-
           <ion-col col="6" *ngFor="let type of pokemon.types"
             class="cardTag {{'bg-color-'+ type.type.name + '-light'}}">
             {{ type.type.name }}
           </ion-col>
-
         </ion-row>
       </ion-card-subtitle>
 
     </ion-col>
+
+            <!-- Imagem pokemon e background -->
+
     <ion-col   (click)="goToDetails(pokemon.name)" class="ion-text-center {{'bg-color-'+ pokemon.types[0].type.name + '-light'}} card-column">
 
       <img class="background-image" [src]="'../../../assets/backgrounds/'+ pokemon.types[0].type.name+'.svg'" alt="Background Image" >

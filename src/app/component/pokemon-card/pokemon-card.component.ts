@@ -41,6 +41,7 @@ export class PokemonCardComponent implements OnInit {
   }
 
   isFavorite(pokemonName: string): boolean {
+    console.log(this.pokemonFavoritList)
     return this.pokemonFavoritList.some(pokemon => pokemon.name == pokemonName);
   }
 
