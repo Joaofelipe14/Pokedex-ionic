@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="title">{{ability.abilityName}}</ion-title>
+    <ion-title>
+      <h1>
+        {{ability.abilityName}}
+      </h1>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -14,7 +18,7 @@
     <div *ngIf="abilityData" class="ion-text-center">
       <h1 class="tag {{'bg-color-'+ ability.type + '-light'}}">Short Effect</h1>
       <p>{{ abilityData.short_effect }}</p>
-      <h1  class="tag {{'bg-color-'+ ability.type + '-light'}}" >Effect</h1>
+      <h1 class="tag {{'bg-color-'+ ability.type + '-light'}}">Effect</h1>
       <p>{{ abilityData.effect }}</p>
     </div>
     <ion-row *ngIf="!abilityData" class="ion-justify-content-center">

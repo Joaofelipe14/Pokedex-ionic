@@ -25,11 +25,11 @@
       <ion-toolbar color='transparent' class="ion-justify-content-center">
         <ion-buttons slot="start">
           <ion-button (click)="previousPage()" [disabled]="isLoading || offset < limit"
-            class="custom-button">Anterior</ion-button>
+            class="custom-button">Previous</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
           <ion-button  (click)="nextPage()" [disabled]="isLoading" [disabled]="hasMorePokemons()"
-            class="custom-button">Próximo</ion-button>
+            class="custom-button">Next</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-col>

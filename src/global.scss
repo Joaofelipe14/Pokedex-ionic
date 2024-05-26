@@ -130,8 +130,17 @@ $general: ('black', $black), ('white', $white), ('grass', $grass), ('grass-light
 
   h1 {
     font-family: 'karla';
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 41px;
+    letter-spacing: 3px;
+    font-family: 'Karla';
+    font-style: normal;
   }
   
+  h1::first-letter{
+    text-transform: uppercase;
+  }
   p {
     font-family: 'karla';
   }
@@ -142,17 +151,6 @@ $general: ('black', $black), ('white', $white), ('grass', $grass), ('grass-light
     font-style: normal;
   }
   
-  .title {
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 41px;
-    letter-spacing: 3px;
-    font-family: 'Karla';
-    font-style: normal;
-  }
-  .title ::first-letter {
-    text-transform: uppercase;
-  }
   .tag {
     text-align: center;
     display: inline-block;

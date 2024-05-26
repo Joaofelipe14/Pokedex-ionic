@@ -39,7 +39,4 @@ export class ModalAbilityComponent  implements  OnInit {
     this.modalController.dismiss();
   }
 
-
-
-
 }

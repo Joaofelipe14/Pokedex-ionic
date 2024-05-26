@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true">
 
     <ion-grid *ngIf="isloading" class="ion-content-centered">
-        <ion-label class="title"> Loading
-        </ion-label>
+        <h1> Loading
+        </h1>
         <ion-spinner name="custom"></ion-spinner>
     </ion-grid>
 
@@ -13,10 +13,10 @@
         <ion-card class="ion-padding-top custom-card">
 
             <!-- Nome  e geracao -->
-            <div class="title ion-text-center">
+            <h1 class="ion-text-center">
                 <strong>{{pokemonName}}</strong> <span class="special-char">
                     {{formatGenerationName(pokemonSpecie.generation.name)}} generation</span>
-            </div>
+                </h1>
             <!-- text entries e gif -->
             <ion-grid>
                 <ion-row class="ion-wrap ion-container">

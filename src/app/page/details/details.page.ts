@@ -106,8 +106,6 @@ export class DetailsPage implements OnInit {
       });
     }
 
-    console.log(this.listPokemon)
-
     /*Chama sempre a chave evolves_to ate termina todas as evolucoes*/
     Evolution.evolves_to?.forEach((nextEvolution: any) => {
       this.extractEvolutions(nextEvolution);
