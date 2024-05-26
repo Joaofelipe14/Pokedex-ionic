@@ -1,6 +1,7 @@
 ###  Pokédex Angular Ionic
 #### Descrição
 Este projeto é uma aplicação desenvolvida em Angular e Ionic, com o propósito de criar uma Pokédex que consome dados da API Pokémons v2. A aplicação é configurada como um Progressive Web App (PWA), possibilitando seu funcionamento offline. Os principais recursos incluem a capacidade de salvar pokémons favoritos localmente, listar todos os pokémons disponíveis e visualizar os detalhes de cada um.
+[Preview do projeto](https://pookedexx.netlify.app/home)
 
 #### Instalação e Configuração
 1. **Pré-requisitos**:
