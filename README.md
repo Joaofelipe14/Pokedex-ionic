@@ -3,7 +3,12 @@
 Este projeto é uma aplicação desenvolvida em Angular e Ionic, com o propósito de criar uma Pokédex que consome dados da API Pokémons v2. A aplicação é configurada como um Progressive Web App (PWA), possibilitando seu funcionamento offline. Os principais recursos incluem a capacidade de salvar pokémons favoritos localmente, listar todos os pokémons disponíveis e visualizar os detalhes de cada um.
 [Preview do projeto](https://pookedexx.netlify.app/home)
 
-#### Instalação e Configuração
+# Vídeo de Demonstração
+
+[![Assista ao vídeo](https://img.youtube.com/vi/qUfBSNKTilQ/0.jpg)](https://www.youtube.com/watch?v=qUfBSNKTilQ)
+
+
+# Instalação e Configuração
 1. **Pré-requisitos**:
    - Node.js e npm devem estar instalados na máquina.
    - Angular CLI e Ionic CLI devem ser instalados globalmente: `npm install -g @angular/cli @ionic/cli`
@@ -23,7 +28,7 @@ Este projeto é uma aplicação desenvolvida em Angular e Ionic, com o propósit
    ionic serve
    ```
 
-#### Arquitetura
+# Arquitetura
 O projeto segue uma arquitetura modular e componentizada, com foco na separação de preocupações e na reutilização de código. Ele é composto por duas páginas principais:
 
 - **Home**: Responsável por listar todos os pokémons disponíveis.
@@ -45,12 +50,12 @@ O projeto segue uma arquitetura modular e componentizada, com foco na separaçã
 - Listagem e detalhamento dos pokémons disponíveis.
 - Filtro de pokémons por nome ou tipo na página principal.
 
-#### Bibliotecas Utilizadas
+# Bibliotecas Utilizadas
 - [**Angular**](https://angular.io/) Framework JavaScript para desenvolvimento de aplicações web.
 - [**Ionic**](https://ionicframework.com/docs) Plataforma de desenvolvimento de aplicativos móveis híbridos.
-- **Angular Service Worker**:Utilizado para a configuração do Service Worker e a transformação da aplicação em PWA.
-- **RxJS**: Biblioteca para programação reativa utilizada para lidar com streams de dados na aplicação.
-- **Ionic Storage**:  Biblioteca para armazenamento local de dados, utilizada para salvar os pokémons favoritos do usuário no IndexedDB.
+- **Angular Service Worker** Utilizado para a configuração do Service Worker e a transformação da aplicação em PWA.
+- **RxJS** Biblioteca para programação reativa utilizada para lidar com streams de dados na aplicação.
+- **IndexedDB**:  Biblioteca para armazenamento local de dados, utilizada para salvar os pokémons favoritos do usuário no IndexedDB.
 
 
 
